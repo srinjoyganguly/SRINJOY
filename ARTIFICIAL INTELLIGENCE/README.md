@@ -1,6 +1,6 @@
 # WELCOME TO THE DOMAIN OF ARTIFICAL INTELLIGENCE - The Power To Create New Species Of Life
 
-![alt text](http://url/to/img.png)
+![ai machine learning](https://user-images.githubusercontent.com/35863175/45927278-8f758c80-bf4e-11e8-8784-05d539684729.jpg)
 
 ## Definition
 Artificial Intelligence deals with the study of creation of an intelligence mechanism which can imitate the levels of human intelligence or far beyond that consisting of various capabilities such as logic, rational thinking, reasoning, knowledge, memory, vision and natural language processing.
