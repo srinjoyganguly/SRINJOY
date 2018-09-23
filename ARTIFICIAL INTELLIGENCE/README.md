@@ -54,4 +54,5 @@ Now, there are large number of applications of AI in various fields. The most pr
 * Computer Vision
 
 ## Acknowledgements
-Artificial Intelligence A Modern Approach Third Edition by Stuart J. Russell and Peter Norvig. [Download Here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwj_37zB-9DdAhXLM48KHQyFBNEQFjAAegQIDRAC&url=https%3A%2F%2Fwww.cin.ufpe.br%2F~tfl2%2Fartificial-intelligence-modern-approach.9780131038059.25368.pdf&usg=AOvVaw0Ba2OoXSl4QuGW-AzLXmx1)
+* Artificial Intelligence A Modern Approach Third Edition by Stuart J. Russell and Peter Norvig. [Download Here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwj_37zB-9DdAhXLM48KHQyFBNEQFjAAegQIDRAC&url=https%3A%2F%2Fwww.cin.ufpe.br%2F~tfl2%2Fartificial-intelligence-modern-approach.9780131038059.25368.pdf&usg=AOvVaw0Ba2OoXSl4QuGW-AzLXmx1)
+* Google Images
