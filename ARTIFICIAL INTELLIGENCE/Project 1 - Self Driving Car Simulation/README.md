@@ -77,12 +77,24 @@ To understand this advanced project, there are some prerequisites which needs to
 * Line 73 - Loss function calculated in line 71 is back propagated into the network and retain_variables = True for freeing memory which will improve the training performance.
 * Line 74 - updates the weights of the NN using the optimizer.
 * In Line 76, the update function is created with self, reward and the new_signal is used for the updating the AI action, the last action becomes the new action, the last state becomes the new state and last reward becomes the new reward and finally we append these new transitions to memory and update the reward window as well. This function will be connecting the map.py file with ai.py file.
+* Line 77 - This new_state depends upon the new_signal (state) which is detected by the sensors when the agent reaches a particular new state.
+* Line 78 - In this we append the new transition just made in the previous line 77 into our memory using the push function made before and this now conatins the last state, new state, last action played and the last reward.
+* Line 79 - Now, since we came to a new state after playing an action, so naturally, we need to play an action and this only is done in this step by using the select_action function with the new_state we have just reached.
+* From lines 80 to 82, we are going to make our AI learn on the basis of its last 100 events picked randomly from the memory of 100000 events, so, we check that if the memory is having events more than 100 or not and if that's true, we collect the samples of the events in batches and start learning on the batches.
+* From lines 83 to 86, all the last action , state, reward and the reward window are updated to new ones.
+* From lines 87 to 89, we just make our size of reward window fixed, so that it doesn't changes and finally return our action.
 
 ![score save and load](https://user-images.githubusercontent.com/35863175/45941706-05383180-bffd-11e8-9db8-e1826d1152da.JPG)
-* Scores will be assigned to the car according to it's performance. If it hits the wall, negative scores wil be provided and when it goes smoothly without any hit, it will generate more positive scores. 
+* Scores will be assigned to the car according to it's performance. If it hits the sand drawnby us, negative rewards will be provided and when it goes smoothly without any hit, it will generate more positive rewards. Lines 91 and 92 are the function which returns the score of this agent.
+* Lines 94 to 97 - This function is created to save the state of the brain of our self driving car, so that we can again run it from it's previous saved state when we load it using the load function.
+* Lines 99 to 107 is the load function. Here first condition is checked if the last state of our brain exists or not and if it does, then, the checkpoint, model and optimizer of our self driving car is loaded.
+* If we don't want the car to have a brain, we need to set the temperature parameter to 0. For better performance, this parameter should be high, but making it too high will make the AI to ignore exploring other actions, so this becomes a trade off point.
 
 ### Elucidation of map.py
 The file called map_commented.py contains detailed explanations of each and every line of the code used in our project.
+
+## Running our Self Driving Car - Outputs
+
 
 ## Acknowledgements
 * Udemy online platform for sustaining this beautiful course on AI.
