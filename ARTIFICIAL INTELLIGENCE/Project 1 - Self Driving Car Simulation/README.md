@@ -34,13 +34,22 @@ To understand this advanced project, there are some prerequisites which needs to
 ## Code Snippets with Detailed Explanation
 ### Elucidation of ai.py file
 ![importing libraries](https://user-images.githubusercontent.com/35863175/45941623-bb4f4b80-bffc-11e8-835f-98283cc8557f.JPG)
-* We are importing all the necessary libraries required for our self driving car to function.
+* [Numpy](http://www.numpy.org/) is imported in line 5 and is used for the scientific computation and linear algebra. In line 6, [random library](https://www.pythonforbeginners.com/random/how-to-use-the-random-module-in-python) is imported which is used for picking random elements from a list or from different batches, [os](https://www.pythonforbeginners.com/os/pythons-os-module) in line 7 is for using the operating system based functions and for interfacing python with OS such as Windows, Mac or  linux. From lines 8 to 11, we import all [torch modules](https://pytorch.org/docs/stable/nn.html) for creating our neural network, calculating loss functions and optimizers. Lines 12 and 13 is for conversion of torch tensors into variables which contain gradients.
 
 ![architecture of nn](https://user-images.githubusercontent.com/35863175/45941635-ca35fe00-bffc-11e8-9251-041f74648fff.JPG)
-* This is the creation of the architecture of our neural network.
+
+* This is the creation of the architecture of our neural network. 
+* In line 17, class is created which inherits tools of the module class to make our neural network. This is called [inheritance](https://www.programiz.com/python-programming/inheritance) which is an imporatnt concept in object oriented programming. 
+* In line 19, init function is created which is always done in python to initialize our class object (self) and this takes three arguments - self, input_size refers to 3 signals + orientation where orientation is a 5D encoded vector (neuron number for input) and nb_action which are the number of output neurons. 
+* Line 20 is used to activate the inheritance. 
+* Lines 21 and 22 are for initializing the inputs and ouputs of the NN. 
+* Line 23 is full connection between the input neurons layer and a hidden layer with 30 neurons.
+* Line 24 is full connection between hidden layer and the output layer (nb_action).
+* In Line 26 forward function is defined with our class object self and state which is the input entering our NN.
+* From lines 27 to 29, We activate the hidden layer with [Relu](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6) and return the output as q values.
 
 ![replaymemory](https://user-images.githubusercontent.com/35863175/45941655-df129180-bffc-11e8-8b4e-eb9d9e1218da.JPG)
-Replay memory.
+* Replay memory.
 
 ![dqn_init_select_action](https://user-images.githubusercontent.com/35863175/45941667-edf94400-bffc-11e8-9346-35f78a469fb6.JPG)
 * Deep Q Network (Dqn) class is created which has various functions to implement the Deep Q-Learning AI algorithm and will form the brain of our self driving car. Since this class is quite large with lots of functions inside it, we have divided it into chunks for better explanation and understanding.
@@ -55,6 +64,7 @@ Replay memory.
 * Udemy online platform for sustaining this beautiful course on AI.
 * Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
 * Lots of thanks to Christian Rosan for providing the appropriate instructions of Kivy installation on Windows.
+* Style of explanation of the code is inspired from Adrian Rosebrock. His [Linkedin](https://www.linkedin.com/in/adrian-rosebrock-59b8732a) and [website](https://www.pyimagesearch.com/author/adrian/)
 
 
 
