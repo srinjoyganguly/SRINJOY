@@ -1,6 +1,6 @@
 # SELF DRIVING CAR SIMULATION
 
-
+![self_driving_car](https://user-images.githubusercontent.com/35863175/45965926-700e5a80-c047-11e8-97aa-614116c83092.jpg)
 
 In this project we are going to simulate a self driving car in a Kivy environment. We will be training the brain of the car using Deep Q learning AI algorithm and will be drawing the map on the Kivy map environment for our car to navigate in that environment. We will be testing various maps for checking the performance of our car. Our car is having three sensors which will be detecting sand (obstacle) in front, left and right directions. These sensors will be generating signals which will be densities of the sand and will be used for the processing of state, action, and reward for the car in a particular state. Our car is the agent which will navigate and explore the Kivy environment and undertake various actions based on it's reward and state. We penalize the car whenever it goes towards the dge of the map or touches any sand and in this way the car trains itself and learns the path and the actions to take.
 
