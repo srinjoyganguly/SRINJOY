@@ -33,7 +33,28 @@ To understand this advanced project, there are some prerequisites which needs to
 
 ## Code Snippets with Detailed Explanation
 ### Elucidation of ai.py file
+![importing libraries](https://user-images.githubusercontent.com/35863175/45941623-bb4f4b80-bffc-11e8-835f-98283cc8557f.JPG)
+* We are importing all the necessary libraries required for our self driving car to function.
 
+![architecture of nn](https://user-images.githubusercontent.com/35863175/45941635-ca35fe00-bffc-11e8-9251-041f74648fff.JPG)
+* This is the creation of the architecture of our neural network.
+
+![replaymemory](https://user-images.githubusercontent.com/35863175/45941655-df129180-bffc-11e8-8b4e-eb9d9e1218da.JPG)
+Replay memory.
+
+![dqn_init_select_action](https://user-images.githubusercontent.com/35863175/45941667-edf94400-bffc-11e8-9346-35f78a469fb6.JPG)
+* Deep Q Network (Dqn) class is created which has various functions to implement the Deep Q-Learning AI algorithm and will form the brain of our self driving car. Since this class is quite large with lots of functions inside it, we have divided it into chunks for better explanation and understanding.
+
+![learn and update](https://user-images.githubusercontent.com/35863175/45941675-f5b8e880-bffc-11e8-9b18-84b4b9570c0c.JPG)
+* Learning and updation of weights of the self driving car network.
+
+![score save and load](https://user-images.githubusercontent.com/35863175/45941706-05383180-bffd-11e8-9db8-e1826d1152da.JPG)
+* Scores will be assigned to the car according to it's performance. If it hits the wall, negative scores wil be provided and when it goes smoothly without any hit, it will generate more positive scores. 
+
+## Acknowledgements
+* Udemy online platform for sustaining this beautiful course on AI.
+* Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
+* Lots of thanks to Christian Rosan for providing the appropriate instructions of Kivy installation on Windows.
 
 
 
