@@ -34,7 +34,10 @@ To understand this advanced project, there are some prerequisites which needs to
 ## Code Snippets with Detailed Explanation
 ### Elucidation of ai.py file
 ![importing libraries](https://user-images.githubusercontent.com/35863175/45941623-bb4f4b80-bffc-11e8-835f-98283cc8557f.JPG)
-* [Numpy](http://www.numpy.org/) is imported in line 5 and is used for the scientific computation and linear algebra. In line 6, [random library](https://www.pythonforbeginners.com/random/how-to-use-the-random-module-in-python) is imported which is used for picking random elements from a list or from different batches, [os](https://www.pythonforbeginners.com/os/pythons-os-module) in line 7 is for using the operating system based functions and for interfacing python with OS such as Windows, Mac or  linux. From lines 8 to 11, we import all [torch modules](https://pytorch.org/docs/stable/nn.html) for creating our neural network, calculating loss functions and optimizers. Lines 12 and 13 is for conversion of torch tensors into variables which contain gradients.
+* [Numpy](http://www.numpy.org/) is imported in line 5 and is used for the scientific computation and linear algebra. 
+* In line 6, [random library](https://www.pythonforbeginners.com/random/how-to-use-the-random-module-in-python) is imported which is used for picking random elements from a list or from different batches, [os](https://www.pythonforbeginners.com/os/pythons-os-module) in line 7 is for using the operating system based functions and for interfacing python with OS such as Windows, Mac or  linux. 
+* From lines 8 to 11, we import all [torch modules](https://pytorch.org/docs/stable/nn.html) for creating our neural network, calculating loss functions and optimizers. 
+* Lines 12 and 13 is for conversion of torch tensors into variables which contain gradients.
 
 ![architecture of nn](https://user-images.githubusercontent.com/35863175/45941635-ca35fe00-bffc-11e8-9251-041f74648fff.JPG)
 
@@ -49,16 +52,37 @@ To understand this advanced project, there are some prerequisites which needs to
 * From lines 27 to 29, We activate the hidden layer with [Relu](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6) and return the output as q values.
 
 ![replaymemory](https://user-images.githubusercontent.com/35863175/45941655-df129180-bffc-11e8-8b4e-eb9d9e1218da.JPG)
-* Replay memory.
+* Replay memory is the implementation of experience replay in which we put some amount of previous (past) states in the memory of the agent navigating the environment with the current state of the agent. After this, we take random batches of these samples of past states to make the next update of the state/action of the agent. In line 33, class is made which inherits the [object class from python to make the code work for both 2.x and 3.x python versions](https://stackoverflow.com/questions/4015417/python-class-inherits-object). 
+* From lines 35 to 37, init function is created with capacity variable (let it be 100000) which stores the maximum transitions in the memory of events and memory variable for the list of past events.
+* From lines 39 to 42, push function is created to append the events to the memory of the agent and delete the oldest transition of events for maintaining the capacity of the memory fixed. Event is tuple of 4 elements - last state, new state, last action and last reward.
+* From lines 44 to 46, the batches are sampled according to state, action and reward using zip and then returned as torch variables. This is done to make everything aligned i.e. in each row - state, action and reward correspond to same time t and eventually we get list of all batches properly aligned in this fashion. From these samples the model will learn.
 
 ![dqn_init_select_action](https://user-images.githubusercontent.com/35863175/45941667-edf94400-bffc-11e8-9346-35f78a469fb6.JPG)
 * Deep Q Network (Dqn) class is created which has various functions to implement the Deep Q-Learning AI algorithm and will form the brain of our self driving car. Since this class is quite large with lots of functions inside it, we have divided it into chunks for better explanation and understanding.
+* In line 50,  we start our Dqn class and in line 52 we initializ ethe init function taking arguments self, input_size, nb_action and gamma- delay coefficient(this comes from the equation the Deep Q Learning model).
+* In line 54, an evolving mean of last 100 rewards to evaluate the evolution of performance of the AI.
+* Line 55 - model of NN for our Deep Q Learning.
+* Line 56 - capacity of 100000 is initialized in the ReplayMemory.
+* Line 57 - connects optimizer to the Deep Q Network and we use the [Adam optimizer](https://medium.com/@nishantnikhil/adam-optimizer-notes-ddac4fd7218).
+* Line 58 - Last state is created which is a vector of 5 dimensions - three signals of the three sensors - straight, left and right and orientation and minus orientation. A fake dimension corresponding to batch is also included using the unsqueeze(0) method as for making this a torch tensor as NN accepts inputs in batches only. 0 corresponds to fake dimesnions of the state.
+* Lines 59 and 60 creates the variables of the last action and reward.
+* In line 62, select_action function is made having inputs as self and state (input state). So, in 63, we generate a distribution of probablities for each Q values corresponding to the three actions - straight, left and right using the softmax function which will attribute large probability to highest Q value. We have three actions to play for each input state. This also enables to keep exploring other actions as well. Volatile is True, which suggests that gradients will not be considered as input to the NN since NN do not require gradients at it's input. Here 30 is the temperature parameter which decides probability of winning Q value. So higher this value is better our self driving car becomes and this tells about the certainity about a particular action agent needs to play. 
+* Lines 64 and 65 has the actions generated and returned for the agent to play - straight, left or right for a particular input state. Multinomial returns pytorch variable with fake batch.
 
 ![learn and update](https://user-images.githubusercontent.com/35863175/45941675-f5b8e880-bffc-11e8-9b18-84b4b9570c0c.JPG)
-* Learning and updation of weights of the self driving car network.
+* Learning (training) and updation of weights of the self driving car network. From lines 67 to 69, we start implementing the learn function which takes input parameters in batches since NN works with batchs as input only, get outputs (simple vector, not tensor) for the batch_states which are inputs of the NN and next_outputs which gives us the maximum Q value of the next state represented by all actions. In the gather function, 1 is chosen with batch_action because we only want the action which was chosen to play and not all actions and this gathers the best action each time for each of the input states. Unsqueeze(1) corresponds to fake dimensions of action which is killed using squeeze(1) as we want outputs as vectors and not in batches (tensors). Detach is used to detach all outputs of the model as we have several states in this batch_next_state which has batches of all next states of all transitions from our random sample memory. Max(1) says that to maximize Q value for action in the next state, so we write 0 for state.
+* Line 70 - formula of target is implemented.
+* Line 71 - Temporal Difference loss is calculated in this step. [Smooth_l1_loss](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwjLz_bPwdPdAhXMso8KHQL9DWQQFjAAegQICBAC&url=https%3A%2F%2Fgithub.com%2Frbgirshick%2Fpy-faster-rcnn%2Ffiles%2F764206%2FSmoothL1Loss.1.pdf&usg=AOvVaw0vqtGZqZTn8jnnVXjrPkue) is the loss function for Deep Q Learning.
+* Line 72 - Reinitializes optimizer at each iteration of the loop.
+* Line 73 - Loss function calculated in line 71 is back propagated into the network and retain_variables = True for freeing memory which will improve the training performance.
+* Line 74 - updates the weights of the NN using the optimizer.
+* In Line 76, the update function is created with self, reward and the new_signal is used for the updating the AI action, the last action becomes the new action, the last state becomes the new state and last reward becomes the new reward and finally we append these new transitions to memory and update the reward window as well. This function will be connecting the map.py file with ai.py file.
 
 ![score save and load](https://user-images.githubusercontent.com/35863175/45941706-05383180-bffd-11e8-9db8-e1826d1152da.JPG)
 * Scores will be assigned to the car according to it's performance. If it hits the wall, negative scores wil be provided and when it goes smoothly without any hit, it will generate more positive scores. 
+
+### Elucidation of map.py
+The file called map_commented.py contains detailed explanations of each and every line of the code used in our project.
 
 ## Acknowledgements
 * Udemy online platform for sustaining this beautiful course on AI.
