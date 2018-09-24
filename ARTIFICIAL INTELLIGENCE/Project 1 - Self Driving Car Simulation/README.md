@@ -1,6 +1,6 @@
 # SELF DRIVING CAR SIMULATION
 
-In this project we are going to simulate a self driving car in a Kivy environment. We will be training the brain of the car using Deep Q learning AI algorithm and will be drawing the map on the Kivy map environment for our car to navigate in that environment. We will be testing various maps for checking the performance of our car.
+In this project we are going to simulate a self driving car in a Kivy environment. We will be training the brain of the car using Deep Q learning AI algorithm and will be drawing the map on the Kivy map environment for our car to navigate in that environment. We will be testing various maps for checking the performance of our car. Our car is having three sensors which will be detecting sand (obstacle) in front, left and right directions. These sensors will be generating signals which will be densities of the sand and will be used for the processing of state, action, and reward for the car in a particular state. Our car is the agent which will navigate and explore the Kivy environment and undertake various actions based on it's reward and state. We penalize the car whenever it goes towards the dge of the map or touches any sand and in this way the car trains itself and learns the path and the actions to take.
 
 ## Prerequisites for this project
 
@@ -22,6 +22,7 @@ To understand this advanced project, there are some prerequisites which needs to
 * pip install Kivy-1.10.1.dev0-cp36-cp36m-win_amd64.whl
 7. In Spyder go to Tools -> Preferences -> Run
 8. Set Console -> Execute in an external system terminal
+9. In case of any error, please consult the debugging files provided with the project. A common error is - TypeError: multinomial() missing 1 required positional arguments: "num_samples". In this case downgrading the pytorch version will help. The verison must be less than 0.4.0
 
 ### For Mac or Linux
 1. Open your terminal.
