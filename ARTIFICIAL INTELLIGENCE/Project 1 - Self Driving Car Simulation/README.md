@@ -1,4 +1,4 @@
-# SELF DRIVING CAR SIMULATION
+# SELF DRIVING CAR SIMULATION - DEEP REINFORCEMENT LEARNING (Deep Q-Learning)
 
 ![self_driving_car](https://user-images.githubusercontent.com/35863175/45965926-700e5a80-c047-11e8-97aa-614116c83092.jpg)
 
