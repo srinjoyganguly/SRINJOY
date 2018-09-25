@@ -98,11 +98,19 @@ The file called map_commented.py contains detailed explanations of each and ever
 
 ## Running our Self Driving Car - Outputs
 
+For running the output, just open the map.py file and run it. To make the self driving car more better, some additional hidden layers can be added into the Network function in ai.py and in map.py the rewards can be adjusted from the lines 140 onwards. You can choose different negative rewards for the car if it touches the sand or it goes if it  touches the corners of the map. Also, try tweaking the temperature parameter.
+
+![track1](https://user-images.githubusercontent.com/35863175/46009096-199f2b80-c0dc-11e8-966d-3055db938fec.gif)
+
+![track2](https://user-images.githubusercontent.com/35863175/46009105-24f25700-c0dc-11e8-9fd7-12290ea9621d.gif)
+
+![track3](https://user-images.githubusercontent.com/35863175/46009131-39365400-c0dc-11e8-90ce-d72eb1f71777.gif)
+
 
 ## Acknowledgements
 * Udemy online platform for sustaining this beautiful course on AI.
 * Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
-* Lots of thanks to Christian Rosan for providing the appropriate instructions of Kivy installation on Windows.
+* Lots of thanks to Christian Rosan for providing the appropriate instructions of Kivy installation on Windows and Igor Brega and Sebastian Zarzycki for their contribution in creating challenging maps and making some valuable additions to the program.
 * Style of explanation of the code is inspired from Adrian Rosebrock. His [Linkedin](https://www.linkedin.com/in/adrian-rosebrock-59b8732a) and [website](https://www.pyimagesearch.com/author/adrian/)
 * Google Images
 
