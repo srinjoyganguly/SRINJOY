@@ -47,22 +47,42 @@ To understand this advanced project, there are some prerequisites which needs to
 ## Code Snippets with Detailed Explanation
 ### Elucidation of ai.py file
 ![importing libraries](https://user-images.githubusercontent.com/35863175/46059437-de086e00-c17c-11e8-8b3e-c76b9f304312.JPG)
+* [Numpy](http://www.numpy.org/) is imported in line 6 and is used for the scientific computation and linear algebra. 
+* From lines 7 to 10, we import all [torch modules](https://pytorch.org/docs/stable/nn.html) for creating our neural network, calculating loss functions and optimizers. 
+* Lines 11 is for conversion of torch tensors into variables which contain gradients.
+* Lines 14 to 16 is for importing the OpenAI Gym environement and the Doom game.
+* Line 19 is for importing the image_processing.py and experience_replay.py files.
 
 ![class cnn](https://user-images.githubusercontent.com/35863175/46059450-e791d600-c17c-11e8-8399-e5de5da1d1aa.JPG)
+* In line 27, class CNN is initialized using inheritance from nn.Module from pytorch and in line 28, init function is defined with the super method used for activating the inheritance.
+* From lines 30 to 32, convolutional layers are defined for the CNN where in_channels is the input, out_channels (number of features) is the output of each convolution and kernel_size is the size of the feature map which slides over the image to capture convolutions with a particular stride.
+* Lines 33 and 34 are the fully connected layer with only one hidden layer where in_features is the number of neurons in first layer and out_features is the number of neurons at output.
+* In line 36, count_neurons is initialized with the line 37 converts the image of the Doom game of dimensions 1x80x80 into a torch variable.
+* From lines 38 to 40, max pooling of the convolutional layers is done and all the layers are activated using the [relu function](https://www.kaggle.com/dansbecker/rectified-linear-units-relu-in-deep-learning). Line 41 returns number of neurons which is required for fully connected 1 layer.
+* In line 43, forward function is defined where the signals are fowarded into the CNN. From lines 44 to 50, convolutions with max pooling is done, those are activated using the relu activation in both fully connected layers and returns the signal.
 
 ![body](https://user-images.githubusercontent.com/35863175/46059467-f37d9800-c17c-11e8-8055-31e570b9d21f.JPG)
+* In line 54, we define a class for making the body of our AI which is a softmax body with a temperature parameter T for controlling our AI's actions (outputs) in a particular state in the Doom environment and then in lines 59 to 62, this softmax is forwarded into the output, returning the actions of our AI.
 
 ![class ai](https://user-images.githubusercontent.com/35863175/46059470-f8dae280-c17c-11e8-86a1-3b89cc634858.JPG)
+* In line 66, our AI class is created with a body and brain intitialized in the init function from lines 67 to 69.
+* From lines 71 to 75, the call functions is created where, inputs are taken in the form of torch variable and this input is provided to the brain (AI algorithm), then the output of this brain is given to our body which defines the actions to be taken by the agent and is returned by the function.
 
 ![getting doom building ai and setting experience replay](https://user-images.githubusercontent.com/35863175/46059476-02644a80-c17d-11e8-9aac-4d0806ac55e3.JPG)
+* From lines 81 to 83, we set our Doom environemnt using the image_processing module and the number of actions to be played by the agent in the Doom environment.
+* From lines 86 to 88, we get our number of actions from the CNN and then this is provided to our softmax body which is going to implement these actions. The AI takes the brain and the actions to play in the Doom.
+* In lines 91 and 92, the experience replay is initialized which is adaptive with the eligibility trace where instead of learning the Q-values every transition, it learns every 10 transitions. So learning is done in 10 steps and cummulative reward is calculated for the AI. This enables faster training of the model and this is called the N step eligibility trace. Capacity is the memory of our AI for storing the transitions.
 
 ![eligibility trace](https://user-images.githubusercontent.com/35863175/46059486-0bedb280-c17d-11e8-9e87-a72e03522646.JPG)
+
 
 ![moving average on 100 steps](https://user-images.githubusercontent.com/35863175/46059490-10b26680-c17d-11e8-8e2b-87c46024db3d.JPG)
 
 ![training the ai](https://user-images.githubusercontent.com/35863175/46059497-190aa180-c17d-11e8-986c-941458cf47c2.JPG)
 
 
+### Elucudation of experience_replay.py file
+Here the experience replay which was implemented in the self driving car is implemented but now it is adaptive to the N step eleigibility trace. In this there are two classes, in the first one which is NStepProgress and is implementing the progress of the memory every N steps. Then we have the ReplayMemory class which makes the N step experience replay works and takes in the memory account of N steps for every transitions and not at each transition.
 
 ## Running our Doom Gameplay
 You can see the outputs in the videos folder provided with this project folder.
