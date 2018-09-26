@@ -73,6 +73,9 @@ To understand this advanced project, there are some prerequisites which needs to
 * From lines 86 to 88, we get our number of actions from the CNN and then this is provided to our softmax body which is going to implement these actions. The AI takes the brain and the actions to play in the Doom.
 * In lines 91 and 92, the experience replay is initialized which is adaptive with the eligibility trace where instead of learning the Q-values every transition, it learns every 10 transitions. So learning is done in 10 steps and cummulative reward is calculated for the AI. This enables faster training of the model and this is called the N step eligibility trace. Capacity is the memory of our AI for storing the transitions.
 
+![asynchronous n step q learning](https://user-images.githubusercontent.com/35863175/46075707-ea0a2500-c1a8-11e8-8e8f-d7871410aa7e.JPG)
+* This is the algorithm of eligibility trace which is being implemented in this function.
+
 ![eligibility trace](https://user-images.githubusercontent.com/35863175/46059486-0bedb280-c17d-11e8-9e87-a72e03522646.JPG)
 * Here the N step eligibility trace algorithm is implemented which is given in the research paper - Asynchronous Methods for Deep Reinforcement Learning in page 13 and is given in the study materials folder. Theta is the target and maximum of Q values will be calculated for the current state and action as well. We won't call this asynchronous (multiple agents) as we will be working with only one agent. Each transition of the series is having the structure - state, action, reward and done.
 * In the line 95, the function eligibility_trace is initialized where the input to the function is a batch which consists of inputs and targets. AI will be trained in batches.
