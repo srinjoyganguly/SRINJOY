@@ -112,7 +112,7 @@ For running the output, just open the map.py file and run it. To make the self d
 * Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
 * Lots of thanks to Christian Rosan for providing the appropriate instructions of Kivy installation on Windows and Igor Brega and Sebastian Zarzycki for their contribution in creating challenging maps and making some valuable additions to the program.
 * Style of explanation of the code is inspired from Adrian Rosebrock. His [Linkedin](https://www.linkedin.com/in/adrian-rosebrock-59b8732a) and [website](https://www.pyimagesearch.com/author/adrian/).
-* Google Images.
+* Google Images
 
 
 
