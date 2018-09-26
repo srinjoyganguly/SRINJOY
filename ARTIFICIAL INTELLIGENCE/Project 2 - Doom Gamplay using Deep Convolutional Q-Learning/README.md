@@ -18,7 +18,6 @@ To understand this advanced project, there are some prerequisites which needs to
 * It's always better to create a separate environement for your project (so that the project contents/settings do not interfere with your original root folder) by running this command - conda create -n env-name python=3.x anaconda. In this x is for the version for example 2.7, 3.5 or 3.6 etc and activate the environment with the commands shown in the terminal after you make the environment.
 * For this project create this environment - conda create -n aidoom python=3.5 anaconda. You can change the environment as you like.
 3. Install Pytorch library using the instructions given [here](https://pytorch.org/get-started/locally/). It is recommended to install the No CUDA - CPU version of Pytorch if you do not have the proper Nvidia graphics card drivers installed or do not have any graphics card. If you have the proper graphics card and it's driver then you are welcome to install the CUDA versions of Pytorch according to your version. To install previous versions of Pytorch click [here](https://pytorch.org/get-started/previous-versions/) and install using pip instructions. Pip ensures that you install everything in your environment only and do not interferes with your root system, however if you install using conda, then it is installed for all the enviornemnts and this interferes with all other environments in your system.
-* In case of any error with the program, downgrade the version of the pytorch which should be less than 0.4.0.
 4. Now follow these steps in sequence and run them one by one in your terminal or Anaconda prompt - 
 * sudo apt-get install  build-essential
 * sudo apt-get install emacs
@@ -43,6 +42,7 @@ To understand this advanced project, there are some prerequisites which needs to
 * python setup.py install
 * pip install -e
 * pip install domm_py == 0.0.15
+5. In case of any error, please consult the debugging files provided with the project. A common error is - TypeError: multinomial() missing 1 required positional arguments: "num_samples". In this case downgrading the pytorch version will help. The verison must be less than 0.4.0.
 
 ## Code Snippets with Detailed Explanation
 ### Elucidation of ai.py file
