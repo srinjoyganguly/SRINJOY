@@ -74,18 +74,58 @@ To understand this advanced project, there are some prerequisites which needs to
 * In lines 91 and 92, the experience replay is initialized which is adaptive with the eligibility trace where instead of learning the Q-values every transition, it learns every 10 transitions. So learning is done in 10 steps and cummulative reward is calculated for the AI. This enables faster training of the model and this is called the N step eligibility trace. Capacity is the memory of our AI for storing the transitions.
 
 ![eligibility trace](https://user-images.githubusercontent.com/35863175/46059486-0bedb280-c17d-11e8-9e87-a72e03522646.JPG)
-
+* Here the N step eligibility trace algorithm is implemented which is given in the research paper - Asynchronous Methods for Deep Reinforcement Learning in page 13 and is given in the study materials folder. Theta is the target and maximum of Q values will be calculated for the current state and action as well. We won't call this asynchronous (multiple agents) as we will be working with only one agent. Each transition of the series is having the structure - state, action, reward and done.
+* In the line 95, the function eligibility_trace is initialized where the input to the function is a batch which consists of inputs and targets. AI will be trained in batches.
+* Line 96 - gamma parameter which is a decay parameter needed in this algorithm.
+* Lines 97 and 98 - inputs and targets are initialized as empty lists which will be filled later on.
+* Line 99 - We start a loop for our series (10 transitions) in our batch.
+* Line 100 - To get our cummulative reward, we need the state of the first and last transitions of our series which is derived here as a torch variable. Series0.state is first one and series-1.state is the last one.
+* Line 101 - Output of the AI, i.e. predictions made by the AI.
+* Line 102 - Cummulative reward is calculated according to the algorithm given in the page 13 of the research paper where if we reach the last state, reward is 0 (series-1.done) where done attribute (Boolean type) comes from [here](https://gym.openai.com/docs/), otherwise, we get the maximum of our Q values.
+* Line 103 - We define a for loop in which we go from element before the last element (second last) to the first element (:-1 signifies that).
+* Line 104 - Cummulative reward is updated according to the formula given in the research paper.
+* Line 105 - Here we get the state of the first transition of our series.
+* Line 106 - Q-value of the input state of the first transition.
+* Line 107 - Here we are only interested in the Q -value for the action which was selected in the first step of the series and update target according to that only.
+* Lines 108 and 109 - We only update the first step of the series because, we train the AI on 10 steps so we do not need the following steps after first step. Due to this reason, we append the first step only to our inputs and targets.
+* Line 110 - Return the inputs and targets as torch tensors.
 
 ![moving average on 100 steps](https://user-images.githubusercontent.com/35863175/46059490-10b26680-c17d-11e8-8e2b-87c46024db3d.JPG)
+* Line 113 - A class for moving average on 100 steps is defined and from lines 114 to 116, we create a function for class object as well as size which is the list of the rewards on which we are going to compute the average.
+* Line 118 - A function to add cummulative rewards to the list of rewards.
+* Line 119 and 120 - We are checking if the isinstance rewards is a list (means rewards are in the form of lists), then we add the list of rewards to rewards because both of them are lists and can be added in python.
+* Line 121 and 122 - Else, when the rewards is not a list, then we append that single reward element to pur list of rewards.
+* Lines 123 and 124 - Here if list of rewards gets bigger than 100 elements, then we delete the first of element of this list of rewards to make sure the list remains at 100 elements only.
+* Lines 126 and 127 - Computing the moving average of the list of rewards of 100 steps at a time.
 
 ![training the ai](https://user-images.githubusercontent.com/35863175/46059497-190aa180-c17d-11e8-986c-941458cf47c2.JPG)
+* Line 132 - We define our loss function which is the [Mean Squared Error](https://en.wikipedia.org/wiki/Mean_squared_error).
+* Line 133 - We set the Adam optimizer like the self driving car case. Learning rate (lr) is taken to be small so that the algorithm do not converges fast by not exploring many options.
+* Line 134 - Number of epochs for training. 1 epoch means going forward propagation into the NN and backward propagation into the NN.
+* Line 135 - We start the loop from 1 to epoch +1 as the upper bound in python is excluded always.
+* Line 136 - In this we have 200 steps running at each epoch.
+* Line 137 - We sample some batches of 128 steps which are last run and stored into the memory and the learning will happen in these batches and inside these batches, the eligibility trace wiill be running for every 10 steps.
+* Lines 138 and 139 - In this the we retrieve the inputs and targets as torch variables using the eligbility trace function applied into the batches.
+* Line 140 - We get our predictions from the CNN as the loss is calculated between predictions and targets.
+* Line 141 - We calculate the loss error between predictions and the targets.
+* Line 142 - We initilaize our Adam optimizer here.
+* Line 143 - backpropagation of loss error into the NN.
+* Line 144 - Here the weights of our NN is updated.
+* Lines 145 to 147 - We get he new cummulative rewards of the steps, add these new cummulative rewards to our moving average class and finally calculate the average reward.
+* Line 148 - Prints the epoch and average rewards.
+* Lines 149 to 151 - If the average reward is greater than 1500, our AI wins the Doom game!
+* Line 154 - To close the Doom environement when the game is finished.
 
 
 ### Elucudation of experience_replay.py file
 Here the experience replay which was implemented in the self driving car is implemented but now it is adaptive to the N step eleigibility trace. In this there are two classes, in the first one which is NStepProgress and is implementing the progress of the memory every N steps. Then we have the ReplayMemory class which makes the N step experience replay works and takes in the memory account of N steps for every transitions and not at each transition.
 
+### Elucidation of image_preprocessing.py file
+This python contains a class called PreprocessImage which is performing some image manipulations and mathematical functions onto the Doom image for its processing. There are two functions which are implementing the tasks such as converting image into black and white to reduce the memory overload and training time, resizing/cropping the image and doing some type conversions based on float variables.
+
 ## Running our Doom Gameplay
-You can see the outputs in the videos folder provided with this project folder.
+* Execute the code of ai.py file and it's done.
+* You can see the outputs in the videos folder provided with this project folder.
 
 ## Acknowledgements
 * Udemy online platform for sustaining this beautiful course on AI.
