@@ -12,3 +12,7 @@ Computer Vision is one of the cutting edge areas of research today because makin
 * Healthcare
 * Agriculture
 * Banking and Retail
+
+## Acknowledgements
+* Deep Learning by Ian Goodfellow, Yoshua Bengio and Aaron Courville, which can be found [here](https://www.deeplearningbook.org/)
+* Wikipedia - The Free Encyclopedia.
