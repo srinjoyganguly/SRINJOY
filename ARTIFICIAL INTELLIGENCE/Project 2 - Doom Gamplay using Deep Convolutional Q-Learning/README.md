@@ -7,6 +7,7 @@
 ## Prerequisites for this project
 
 To understand this advanced project, there are some prerequisites which needs to be met so that you can enjoy the benefits of this project. Let's summarize them - 
+* Understanding of [Convolutional Neural Networks](https://adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks/) and [Deep Learning](https://www.deeplearningbook.org/).
 * The online course of AI from UC Berkeley, which you can find [here](http://ai.berkeley.edu/lecture_videos.html) - most important topics are - reinforcement learning, Bellman equation, Markov Decision Process, Temporal Difference, Q-Learning, Deep Q-Learning and experience replay.
 * A good tutorial on Deep Convolutional Q-Learning can be found [here](https://vmayoral.github.io/robots,/ai,/deep/learning,/rl,/reinforcement/learning/2016/08/07/deep-convolutional-q-learning/) and Eligibility Trace is provided [here](https://amreis.github.io/ml/reinf-learn/2017/11/02/reinforcement-learning-eligibility-traces.html) and in this [link](http://pierrelucbacon.com/traces/).
 * Programming experience in Python and [Pytorch library](https://pytorch.org/) which will be used in this heavily. Pytorch tutorials can be found at this [link](https://pytorch.org/tutorials/).
@@ -135,6 +136,7 @@ This python contains a class called PreprocessImage which is performing some ima
 * Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
 * Lots of thanks to Zenodia Charpy for providing the appropriate instructions of OpenAI Gym on Windows, and those instructions also worked for me in my Ubuntu 16.04.
 * Style of explanation of the code is inspired from Adrian Rosebrock. His [Linkedin](https://www.linkedin.com/in/adrian-rosebrock-59b8732a) and [website](https://www.pyimagesearch.com/author/adrian/)
+* Lots of Thanks to Adit Deshpande for an excellent tutorial on CNNs.
 * Google Images.
 
 
