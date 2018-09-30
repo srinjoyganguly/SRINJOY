@@ -7,8 +7,9 @@ In this project we are going to simulate a self driving car in a Kivy environmen
 ## Prerequisites for this project
 
 To understand this advanced project, there are some prerequisites which needs to be met so that you can enjoy the benefits of this project. Let's summarize them - 
-* The online course of AI from UC Berkeley, which you can find [here](http://ai.berkeley.edu/lecture_videos.html) - most important topics are - reinforcement learning, Bellman equation, Markov Decision Process, Q-Learning, Deep Q-Learning and experience replay.
-* Programming experience in Python and Pytorch library which will be used in this heavily.
+* Understanding of [Artificial Neural Networks](https://www.tutorialspoint.com/artificial_neural_network/) and [Deep Learning](https://www.deeplearningbook.org/). Many online courses can be found on these topics from Coursera, Udemy, edX and Udacity.
+* The online course of AI from UC Berkeley, which you can find [here](http://ai.berkeley.edu/lecture_videos.html) - most important topics are - reinforcement learning, Bellman equation, Markov Decision Process, Q-Learning, Deep Q-Learning, Temporal Difference and experience replay.
+* Programming experience in Python and Pytorch library which will be used in this heavily. Pytorch dcumentation can be found [here](https://pytorch.org/docs/stable/index.html).
 
 ## Installation Instructions
 ### For Windows
