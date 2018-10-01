@@ -11,4 +11,27 @@ These are some of the prerequisites of the project which you have to be familiar
 * Python programming experience with the knowledge of [Pytorch](https://pytorch.org/tutorials/) and [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html).
 
 ## Installation Instructions
-### For Windows, Mac and Linux
+### For Mac and Linux
+1. Install Anaconda software - Python 3.6 version from [here](https://www.anaconda.com/download/). This software comes with the Python IDE and lots of more libraries for data science and machine learning such as Numpy, pandas, matplotlib, scipy etc.
+2. Open the terminal.
+3. Download the Installations folder in your desktop given with this project.
+4. Type the command - cd Desktop/Installations, and press enter to get inside the folder.
+5. Now type the command - conda env create -f virtual_platform_linux.yml. Then press enter and it will install everything we need for this project. For mac, the file name should be virtual_platform_mac.yml.
+6. Now open the Anaconda Navigator and in the Applications on tab select - virtual_platform.
+7. Launch Spyder.
+
+## For Windows
+1. Install Anaconda software - Python 3.6 version from [here](https://www.anaconda.com/download/). This software comes with the Python IDE and lots of more libraries for data science and machine learning such as Numpy, pandas, matplotlib, scipy etc.
+2. Download the Installations folder in your desktop given with this project.
+3. Go to the installations folder and open virtual_platform_windows.yml file with notepad. In this file, delete the line 92 - pytorch = 0.1.2=py35_0.1.12cu80 and line 100 - torch==0.1.12. If you found the lines to be deleted already then skip this step.
+4. Open the Anaconda Prompt which is similar to a terminal used in Linux or Mac and type the command - cd Desktop/Installations, and press enter to get inside the folder.
+5. Now type the command - conda env create -f virtual_platform_windows.yml. Then press enter and it will install everything we need for this project.
+6. Activate the virtual platform by typing and executing the command - activate virtual_platform.
+7. Type the command - conda update --all.
+8. Install Pytorch library by typing this command - conda install -c peterjc123 pytorch cuda80.
+9. Install Torchvision by typing this command - pip install torchvision-0.2.0-py2.py3-none-any.whl.
+10. Now open the Anaconda Navigator and in the Applications on tab select - virtual_platform.
+11. Launch Spyder.
+
+## Code Snippets with Detailed Explanation
+### Elucidation of Happiness_Detector.py file
