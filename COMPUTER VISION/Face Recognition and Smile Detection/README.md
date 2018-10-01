@@ -2,7 +2,7 @@
 
 ![smile_face_detection](https://user-images.githubusercontent.com/35863175/46254204-2d1a1000-c4a9-11e8-89ef-0e9e79a9a123.jpg)
 
-In this project, we are going to build a face recognition and smile detection system, which will be able to detect our faces, eyes as well as our smiles whenever we smile. The most important algorithm used for this technique is known as the Viola-Jones Algorithm which was created by Paul Viola and Michael Jones in 2001. This algorithm was designed to look only for features of frontal faces and is not applicable for side, up or down faces. It converts the image into black and white picture and starts scanning the whole image with a box (which can be scaled). So, this Viola-Jones tries to look for Haar Like features in our faces which are derived from the Haar wavelet. A photo may have these features especiall if it's a face and so the algorithm detects these features to confirm if the image contains a face or not.  
+In this project, we are going to build a face recognition and smile detection system, which will be able to detect our faces, eyes as well as our smiles whenever we smile. The most important algorithm used for this technique is known as the Viola-Jones Algorithm which was created by Paul Viola and Michael Jones in 2001. This algorithm was designed to look only for features of frontal faces and is not applicable for side, up or down faces. It converts the image into black and white picture and starts scanning the whole image with a box (which can be scaled). So, this Viola-Jones tries to look for Haar Like features in our faces which are derived from the Haar wavelet. A photo may have these features especially if it's a face and so the algorithm detects these features to confirm if the image contains a face or not.  
 ![haar like features](https://user-images.githubusercontent.com/35863175/46273755-80a56000-c574-11e8-9ff3-f1b94285b4ca.png)
 
 ## Prerequisites For This Project
@@ -35,3 +35,16 @@ These are some of the prerequisites of the project which you have to be familiar
 
 ## Code Snippets with Detailed Explanation
 ### Elucidation of Happiness_Detector.py file
+![1](https://user-images.githubusercontent.com/35863175/46276367-7471d080-c57d-11e8-81d6-90452b48b469.JPG)
+* Line 4 - We import the OpenCV library, which is used for working with computer vision projects and applications.
+* Lines 7 to 9 - We load the cascades for the face, eyes and the smiles and these will be used to detect the facial features.
+* Line 12 - We define a function that will do the face detection.
+* Line 13 - It returns the tuples of 4 elements - x and y coordinates of the upper left corner of the rectangle which will detect the face and width and height of these rectangles. Gray is chosen as cascading works only with black and white images, 1.3 is the size of image reduction and 5 is the minimum number of neighbouring zones pixels which is required to accepted in order for a pixel zone to get accepted.
+* Line 14 - We start the for loop which will iterate through each face, draw the rectangle around them and detect the face.
+* Line 15 - This is for drawing the rectangles around the faces, where frame is image in which we want to draw our rectangle, (x,y) are coordinates of the upper left corner of rectangle, (x+w,y+h) are coordinates of lower right corner of rectangle, (255,0,0) is for color of the rectangle detecting the face and 2 is the thickness of the rectangle.
+* Line 16 and 17 - These are the region of interest for the black and white and color images.
+* Line 18 - Returns tuples of coordinates of upper left corner of rectangle and width and height of eyes for the detection of eyes.
+* Line 19 and 20 - Iterating through the eyes, detecting them and drawing rectangle around the eyes.
+* Lines 21 to 24 - The smile cascade is loaded and then iteration is carried out to look an detect for smiles. The rectangle is then drawn on the smiles and the fram is returned in the end, consisting of all the detections such as face, eyes and smiles.
+
+![2](https://user-images.githubusercontent.com/35863175/46276372-79368480-c57d-11e8-8057-f0d56d913b48.JPG)
