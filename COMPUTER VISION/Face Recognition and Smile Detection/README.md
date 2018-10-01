@@ -48,3 +48,14 @@ These are some of the prerequisites of the project which you have to be familiar
 * Lines 21 to 24 - The smile cascade is loaded and then iteration is carried out to look an detect for smiles. The rectangle is then drawn on the smiles and the fram is returned in the end, consisting of all the detections such as face, eyes and smiles.
 
 ![2](https://user-images.githubusercontent.com/35863175/46276372-79368480-c57d-11e8-8057-f0d56d913b48.JPG)
+* Line 27 - This contains the last frame coming from the webcam and 0 is for webcam of computer (internal) and 1 will be for external webcam.
+* Line 28 and 29 - A while loop which will iterate through the webcam frames indefinitely and will read the last frame from the webcam in which we are interested.
+* Line 30 - Converts color image to balck and white (grayscale) image.
+* Line 31 - We apply our detect function for the recognition of face and detection of eyes and smile in the webcam frame captured.
+* Line 32 - Display preprocesses images in an animated way in a window.
+* Line 33 and 34 - Used to break while loop when we press 'q' from the keyboard.
+* Line 35 - Turn off the webcam.
+* Line 36 - Destroys the windows inside which all the images were displayed.
+
+## Outputs
+
