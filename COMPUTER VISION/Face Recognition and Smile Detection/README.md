@@ -66,6 +66,10 @@ Eye and Face Detection
 Face, Eye and Smile Detection
 
 ## Acknowledgements
-
+* Udemy online platform for sustaining this beautiful course on AI.
+* Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
+* Lots of thanks to Jordan Sauchuk (teaching asistant) for providing the appropriate instructions of installation on Windows and clearing doubts in the course.
+* Style of explanation of the code is inspired from Adrian Rosebrock. His [Linkedin](https://www.linkedin.com/in/adrian-rosebrock-59b8732a) and [website](https://www.pyimagesearch.com/author/adrian/).
+* Google Images
 
 
