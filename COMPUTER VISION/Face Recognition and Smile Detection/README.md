@@ -58,4 +58,13 @@ These are some of the prerequisites of the project which you have to be familiar
 * Line 36 - Destroys the windows inside which all the images were displayed.
 
 ## Outputs
+![eye_face_detection](https://user-images.githubusercontent.com/35863175/46279671-69bc3900-c587-11e8-9071-efdf2a625b00.gif)
+Eye and Face Detection
+
+
+![face_smile_eye_detection](https://user-images.githubusercontent.com/35863175/46280081-8c028680-c588-11e8-8466-6fa8f6a3a86a.gif)
+Face, Eye and Smile Detection
+
+## Acknowledgements
+
 
