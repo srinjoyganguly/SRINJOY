@@ -133,7 +133,7 @@ This python contains a class called PreprocessImage which is performing some ima
 
 ## Acknowledgements
 * Udemy online platform for sustaining this beautiful course on AI.
-* Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI
+* Huge ton of thanks to Hadelin De Ponteves and Kirill Ermenko for creating this wonderful course on AI and Jordan Sauchuk (teaching assistant) for helping in the course throughout and clearing all the doubts.
 * Lots of thanks to Zenodia Charpy for providing the appropriate instructions of OpenAI Gym on Windows, and those instructions also worked for me in my Ubuntu 16.04.
 * Style of explanation of the code is inspired from Adrian Rosebrock. His [Linkedin](https://www.linkedin.com/in/adrian-rosebrock-59b8732a) and [website](https://www.pyimagesearch.com/author/adrian/)
 * Lots of Thanks to Adit Deshpande for an excellent tutorial on CNNs.
