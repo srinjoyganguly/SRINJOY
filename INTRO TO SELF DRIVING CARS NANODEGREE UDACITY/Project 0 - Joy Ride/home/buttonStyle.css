@@ -1,0 +1,13 @@
+button{  
+    border: 0; 
+    border-radius:5px;
+}
+#restart{
+    background:#FF0000;
+    color:white; 
+}
+
+#launcher{
+    background:#00FF00;
+    color:black; 
+}

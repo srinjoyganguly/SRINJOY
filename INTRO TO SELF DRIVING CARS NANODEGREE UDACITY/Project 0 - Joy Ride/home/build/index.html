@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Simple Web Sockets</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+        // /files/build/Build/P0_Joy_Ride_iSDC.json
+        // https://s3.amazonaws.com/udacity-test-1/PO_Joy_Ride_iSDC.json
+      var gameInstance = UnityLoader.instantiate("gameContainer", "https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/iSDC/P0_json/P0_Joy_Ride_iSDC.json", {onProgress: UnityProgress});
+      function mySetupFunction() {
+        var fullHost = document.location.hostname;
+        var parts = fullHost.split('.');
+        var host = parts[0].split('-');
+        var socketLoc = 'wss://' + host[0] + '-3001.' + 
+        parts[1] + '.' + parts[2];
+        gameInstance.SendMessage ('SocketClient', 'StartConnection', socketLoc);
+        console.log('Finished calling setup function in Unity')
+      }
+    </script>
+
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">Simple Web Sockets</div>
+      </div>
+    </div>
+  </body>
+</html>

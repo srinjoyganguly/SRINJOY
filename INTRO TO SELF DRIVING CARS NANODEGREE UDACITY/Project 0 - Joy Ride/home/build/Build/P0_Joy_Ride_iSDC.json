@@ -1,0 +1,13 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Simple Web Sockets",
+"dataUrl": "P0_Joy_Ride_iSDC.data.unityweb",
+"asmCodeUrl": "P0_Joy_Ride_iSDC.asm.code.unityweb",
+"asmMemoryUrl": "P0_Joy_Ride_iSDC.asm.memory.unityweb",
+"asmFrameworkUrl": "P0_Joy_Ride_iSDC.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
