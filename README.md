@@ -14,6 +14,7 @@ Any kind of comments or feedback on my projects are always welcome and I will do
 * MACHINE LEARNING
 * NATURAL LANGUAGE PROCESSING
 * SELF DRIVING CAR ENGINEER NANODEGREE UDACITY
+
 For the Term 1 of this nanodegree program, out of thousands of applicants, I have achieved the prestigious Udacity-KPIT Autonomous Tech Scholarship 2018/2019 on March 28th, 2019. My batch started from April 15th, 2019. The challenge here is to complete the Term 1 in 2 months rather than normally provided 3 months duartion.
 * VIRTUAL REALITY / AUGMENTED REALITY
 
