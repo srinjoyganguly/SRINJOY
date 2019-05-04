@@ -35,4 +35,4 @@ The above two images represent Udacity's own self driving car named as CARLA.
 
 ![Udacity KPIT Scholarship Badge](https://user-images.githubusercontent.com/35863175/57179071-464bca80-6e97-11e9-94f8-3848a8fe2962.jpeg)
 
-Out of thousands of applicants, I was very lucky to get this prestigious scholarship by Udacity-KPIT collaboration for the Term 1 of this course.
+**Out of thousands of applicants, I was very lucky to get this prestigious scholarship by Udacity-KPIT collaboration for the Term 1 of this course.
