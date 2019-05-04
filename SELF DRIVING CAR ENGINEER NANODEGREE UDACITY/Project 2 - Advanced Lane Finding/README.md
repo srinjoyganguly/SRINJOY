@@ -13,7 +13,7 @@ The goals / steps of this project are the following:
 
 Now I will discuss each of the steps of the project in detail 
 
-**Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.**
+### **Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.**
 
 Advanced Lane Finding Jupyter(IPython) notebook is having all the code sections for this project.
 
@@ -27,7 +27,7 @@ By using the above strategy, I was able to successfully detect the chessboard co
 
 In this way I was able to determine the corners of all the images provided in the camera_cal folder. 
 
-**Apply a distortion correction to raw images.**
+### **Apply a distortion correction to raw images.**
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function. 
 
@@ -41,7 +41,7 @@ The, I applied my cv2.undistort() function to a test image and got the following
 
 The differences in the above two images might not be visible immediately but if carefully observe the white car on the extreme right, we will be able to identify that the original image has indeed been undistorted by the cv2.undistort() function. 
 
-**Apply a perspective transform to our test image ("birds-eye view").**
+### **Apply a perspective transform to our test image ("birds-eye view").**
 
 The code for my perspective transform includes a function called `perspective_transformr()`in the 5th code cell of the IPython notebook Advanced lane Finding.  The function takes as inputs an image.  I chose the hardcode the source and destination points in the following manner:
 src = np.float32(
@@ -75,7 +75,7 @@ After applying the perspective transform to my test image, I got the result as f
 
 As we can clearly observe the bird’s eye view of our lane lines which will be immensely beneficial for us to detect our lane lines accurately and keep track of its curves and movements. 
 
-**Use colour transforms, gradients, etc., to create a thresholded binary image.**
+### **Use colour transforms, gradients, etc., to create a thresholded binary image.**
 
 For the colour transformation, I have used the HLS (Hue, Lightness, Saturation) because I have clearly observed that two of the colour channels namely L & S gives much of the clear visual of the lane lines, the output of which I have shown below:
 
@@ -90,7 +90,7 @@ By using the above combined_thresh() function, I was able to get the binary imag
 
 ![binary image](https://user-images.githubusercontent.com/35863175/57183309-66e04880-6ec8-11e9-856b-0fd14187d148.JPG)
 
-**Detect lane pixels and fit to find the lane boundary.**
+### **Detect lane pixels and fit to find the lane boundary.**
 
 First of all to visualize the region of the lane lines more prominently, I calculated the image histogram of the warped binary image obtained in the previous step, which is given as follows:
 
@@ -112,7 +112,7 @@ By doing all the work, I get the output as follows:
 
 ![shaded boundary line](https://user-images.githubusercontent.com/35863175/57183323-d3f3de00-6ec8-11e9-88fc-f330b40defc2.JPG)
 
-**Determine the curvature of the lane and vehicle position with respect to center.**
+### **Determine the curvature of the lane and vehicle position with respect to center.**
 
 In the 19th code cell of my IPython notebook, I have tried to just convert the pixel world coordinates into the real world coordinates, means I have tried to determine meters per pixel in each x and y coordinates with the help of which I have been able to determine the curvature of our lane.
 
@@ -121,23 +121,23 @@ In the 20th code cell of my IPython notebook, I have calculated the vehicle posi
 1433.1269663946957 m 838.8893329588586 m – Left curvature & Right curvature
 -0.16487512022115608 m – Vehicle position w.r.t. Lane centre
 
-**Warp the detected lane boundaries back onto the original image.**
+### **Warp the detected lane boundaries back onto the original image.**
 
 In the 22nd code cell of the IPython notebook, I have defined a function called warp_lanes_onto_original() in which I have taken the original image, binary image left fit, right fit and Minv values to warp the detected lane lines back to our original image, the output of which can be seen as below:
 
 ![warp onto original image](https://user-images.githubusercontent.com/35863175/57183337-0ef61180-6ec9-11e9-8cea-c545fe42faf7.JPG)
 
-**Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.**
+### **Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.**
 
 In the 24th code cell, I have shown the original image with the curvature and vehicle position data shown by using a function, the output of which is given as follows:
 
 ![show curvature data onto original warped](https://user-images.githubusercontent.com/35863175/57183347-3a78fc00-6ec9-11e9-81ee-f384f37ea773.JPG)
 
-**Pipeline (video)**
+### **Pipeline (video)**
 
 I have included the video along with this folder named as project_video_output.mp4
 
-**Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?**
+### **Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?**
 
 I believe that my pipeline might be failing where the lighting conditions are not so good or the lighting conditions are fluctuating very frequently. To make the pipeline more robust we can use the other colour spaces such as HLS and LAB which does not get affected by the lighting conditions overall. We can combine the Colour channels where we find the that lighting conditions are not affecting our image frames and can work on that by combining them as I did for L & S channels here.
 
