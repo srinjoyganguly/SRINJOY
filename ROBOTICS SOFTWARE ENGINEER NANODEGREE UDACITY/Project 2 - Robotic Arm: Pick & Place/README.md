@@ -249,8 +249,11 @@ R3_6 is the rotation matrix of the extrinsic X-Y-Z rotation sequence account for
 where R_XYZ is R3_6, and alpha, beta, gamma is theta4, theta5, theta6.
 
 and the angles are given as follows
+
 ![Rotation angle alpha](https://user-images.githubusercontent.com/35863175/57880019-5f5f5e80-783b-11e9-8983-8eee7732c52f.png)
+
 ![Rotation angle beta](https://user-images.githubusercontent.com/35863175/57880028-61c1b880-783b-11e9-9613-17906a974b81.png)
+
 ![Rotation angle gamma](https://user-images.githubusercontent.com/35863175/57880034-64bca900-783b-11e9-8f3b-c873fd00f558.png)
 
 
@@ -272,6 +275,7 @@ I have properly commented the code IK_server.py to make it more understandable.
 Screenshots showing the arm picking and placing!
 
 <img width="501" alt="Arm Picking Up 1" src="https://user-images.githubusercontent.com/35863175/57880174-bcf3ab00-783b-11e9-9d38-c7bce55bb6bd.png">
+
 ![Arm Picking Up 2](https://user-images.githubusercontent.com/35863175/57880187-c1b85f00-783b-11e9-8550-4b10f7e89378.png)
 
 
