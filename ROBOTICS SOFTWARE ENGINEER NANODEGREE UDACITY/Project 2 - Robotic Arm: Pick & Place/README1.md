@@ -1,5 +1,5 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
-# Robotic arm - Pick & Place project
+# Robotic arm - Pick & Place Project
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
