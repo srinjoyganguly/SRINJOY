@@ -166,17 +166,6 @@ So, we get the DH parameter table as follows
 
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
-0->1 | 0 | 0 | L1 | qi
-1->2 | - pi/2 | L2 | 0 | -pi/2 + q2
-2->3 | 0 | 0 | 0 | 0
-3->4 |  0 | 0 | 0 | 0
-4->5 | 0 | 0 | 0 | 0
-5->6 | 0 | 0 | 0 | 0
-6->EE | 0 | 0 | 0 | 0
-#### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
-
-Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
---- | --- | --- | --- | ---
 0->1 | 0 | 0 | 0.75 | q1
 1->2 | - pi/2 | 0.35 | 0 | q2 -pi/2
 2->3 | 0 | 1.25 | 0 | q3
@@ -188,21 +177,101 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 The code sample for this DH parameter is given below
 ![DH Table Code](https://user-images.githubusercontent.com/35863175/57877503-a21e3800-7835-11e9-88e7-5ddf27cb975c.png)
 
+#### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
+
+For each of the link in our case it is made up of 2 rotations and 2 translations (4 transforms in total) which can be seen by this generalized equation
+![dh-transform](https://user-images.githubusercontent.com/35863175/57878391-8ddb3a80-7837-11e9-9d09-d77599a89807.png)
+
+In the compact matrix form, the relative transformations going from link i-1 to i is given as 
+![dh-transform-matrix](https://user-images.githubusercontent.com/35863175/57878503-cbd85e80-7837-11e9-805b-37741bde63c4.png)
+
+As explained earlier that FK problem is composition of many homogeneous transforms, so, I determined the transfromation between base_link and the end_effector by pre-multiplying(intrinsic transformations) all individual transforms together:
+<img width="202" alt="Intrinsic Transformations" src="https://user-images.githubusercontent.com/35863175/57878711-41442f00-7838-11e9-9896-d8bbe60b905d.png">
+
+In code, I did as follows - 
+Created a function for Modified DH Transformation Matrix
+![Modified DH Transformation Matrix code](https://user-images.githubusercontent.com/35863175/57878774-68026580-7838-11e9-96fb-6025d5e194ff.png)
+
+Then calculated the individual transformation as follows
+![Individial Transformation Matrices code](https://user-images.githubusercontent.com/35863175/57878830-8ff1c900-7838-11e9-9638-ad95c8dfcff1.png)
+
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
+Inverse Kinematics (IK) is basically the opposite idea of FK. In this case, the pose i.e. position and orientation of the end effector is known and the goal is to calclulate the joint angles of the manipulator.
 
-And here's where you can draw out and show your math for the derivation of your theta angles. 
+The last three joints of the robot are revolute and their joint axes intersect at a single point at joint 5 - it's a spherical wrist with joint_5 being its wrist center.
 
-![alt text][image2]
+I kinematically decoupled the IK problem into two steps: Inverse Position and Inverse Orientation.
+
+**Inverse Position**
+
+The goal of this step is to find the first 3 joint angles using the end effector's position in Cartesian coordinates.
+
+The spherical wrist involving joints 4,5,6, the position of the wrist center is governed by the first three joints. I used the complete transformation matrix derived above to find the position of the wrist center:
+![Complete transformation](https://user-images.githubusercontent.com/35863175/57879327-d98ee380-7839-11e9-9ace-d5424d30caf0.png)
+
+where Px, Py, Pz represent the position of end-effector w.r.t. base_link and d represents the displacement between wrist center and gripper along the z-axis, which is dG in the graph below and the values are defined in the URDF file.
+
+Once I have the wrist center position, I used trigonometry to find the values for the first three joint angles. theta1 is straightforward by looking from above to the robotic arm:
+
+![theta1 angle](https://user-images.githubusercontent.com/35863175/57879456-2a9ed780-783a-11e9-9d70-b77085badc45.png)
+
+In code it is as follows 
+
+![theta1 code](https://user-images.githubusercontent.com/35863175/57879500-44401f00-783a-11e9-9927-9ffb243f2b3c.png)
+
+Now we can focus on  theta2 and theta3 angles:
+
+![theta2_theta3](https://user-images.githubusercontent.com/35863175/57879546-62a61a80-783a-11e9-9259-3990d22091cc.png)
+
+From the DH parameters I calculated the distance between each joint and then used Cosine Laws to calculate theta2 and theta3.
+
+Now moving on to Inverse Orientation
+
+**Inverse Orientation**
+
+The goal is to find the values of the final three joint angles.
+
+Using the values of the first joint angles obtained above, I calculated R0_3 via the application of homogeneous transformations up to the WC. Then I find the rotation matrix between joint 3 and joint 6:
+
+![Euler Angle](https://user-images.githubusercontent.com/35863175/57879774-d8aa8180-783a-11e9-981f-72e2487d8c0f.png)
+
+In coding I did as follows:
+
+
+![Euler Angle code](https://user-images.githubusercontent.com/35863175/57879825-f0820580-783a-11e9-80a4-0de4cccffd92.png)
+
+where R0_6 is the homogeneous RPY rotation matrix calculated above from the base_link to gripper_link.
+
+R3_6 is the rotation matrix of the extrinsic X-Y-Z rotation sequence account for the end gripper from the wrist center:
+
+![Rotation Matrix](https://user-images.githubusercontent.com/35863175/57879936-2b843900-783b-11e9-80b7-afcf74c33e0e.png)
+where R_XYZ is R3_6, and alpha, beta, gamma is theta4, theta5, theta6.
+
+and the angles are given as follows
+![Rotation angle alpha](https://user-images.githubusercontent.com/35863175/57880019-5f5f5e80-783b-11e9-8983-8eee7732c52f.png)
+![Rotation angle beta](https://user-images.githubusercontent.com/35863175/57880028-61c1b880-783b-11e9-9613-17906a974b81.png)
+![Rotation angle gamma](https://user-images.githubusercontent.com/35863175/57880034-64bca900-783b-11e9-8f3b-c873fd00f558.png)
+
 
 ### Project Implementation
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
+Apart from the given libraries in the code, I also used numpy for faster calculations. 
 
-Here I'll talk about the code, what techniques I used, what worked and why, where the implementation might fail and how I might improve it if I were going to pursue this project further.  
+First of all I defined three functions for the rotation of X, Y and Z axes individually because these were used to correct the orientation difference between the conventional DH system and the Gripper definition link given in the URDF file. 
+
+I created a modified DH transformation matrix for using it later to derive individual transforms. I also defined a small function to clip the angles between certain limits using numpy. 
+
+In the inverse orientation step, I transposed the matrix R3_6 instead of invert it. I did this because inverting a matrix is complex and can be numerically unstable, and I could do this because the rotation matrices are orthogonal and its tranpose is the same as its inverse.
+
+I have properly commented the code IK_server.py to make it more understandable. 
 
 
-And just for fun, another example image:
-![alt text][image3]
+Screenshots showing the arm picking and placing!
+
+<img width="501" alt="Arm Picking Up 1" src="https://user-images.githubusercontent.com/35863175/57880174-bcf3ab00-783b-11e9-9d38-c7bce55bb6bd.png">
+![Arm Picking Up 2](https://user-images.githubusercontent.com/35863175/57880187-c1b85f00-783b-11e9-8550-4b10f7e89378.png)
+
 
