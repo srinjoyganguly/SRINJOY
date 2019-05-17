@@ -195,6 +195,11 @@ Created a function for Modified DH Transformation Matrix
 Then calculated the individual transformation as follows
 ![Individial Transformation Matrices code](https://user-images.githubusercontent.com/35863175/57878830-8ff1c900-7838-11e9-9638-ad95c8dfcff1.png)
 
+The Gripper Link Definition given in the URDF file was having some Orientation Difference from the DH Convention, so to rectify that I applied a simple rotation around Z axis followed by a Rotation around Y axis. The code is given below:
+
+![Rotation Matrices code](https://user-images.githubusercontent.com/35863175/57910364-bd735c80-78a2-11e9-856e-dbfc901a1ef9.png)
+
+![Orientation Difference Error Correction](https://user-images.githubusercontent.com/35863175/57910388-d24ff000-78a2-11e9-8a7c-fef879b2903f.png)
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 Inverse Kinematics (IK) is basically the opposite idea of FK. In this case, the pose i.e. position and orientation of the end effector is known and the goal is to calclulate the joint angles of the manipulator.
@@ -278,11 +283,11 @@ Again to mention
 
 So, for this I have calculated them using the above formula provided for the alpha, beta and gamma angles.
 
-Here we can see that theta5 (i.e. beta) has two solutions because there is a square root operation inside the atan2 function. Atan2 function returns the angles between -pi and pi. To account for the two solutions, I have done the following in my code:
+Here we can see that theta5 (i.e. beta) has two solutions because there is a square root operation inside the atan2 function. We can observe very clearly that the values inside the square root - R3_6[0, 2] and R3_6[2, 2] are being used in the theta4 and theta6 formula which gets affected by the two solutions provided by theta5. Atan2 function returns the angles between -pi and pi. To account for the two solutions, I have done the following in my code:
 
 ![Calculation of theta 5, theta 4 and theta 6](https://user-images.githubusercontent.com/35863175/57907503-47b7c280-789b-11e9-93d8-3b2c025c09c1.png)
 
-To pick the best solution for the theta4, theta5 and theta6, I used a simple if/else statement.
+To pick the best solution for the theta4, theta5 and theta6, I used a simple if/else statement and calculated the theta4 anf theta6 values according to the theta5 solution.
 
 ### Project Implementation
 
@@ -307,6 +312,6 @@ And finally here is a screenshot of a completed operation of 8/10 pickup!!
 
 ![Objects Pick Up and Placed 8](https://user-images.githubusercontent.com/35863175/57909565-c400d480-78a0-11e9-94ac-e1adf78c4099.PNG)
 
-If you observe carefully, the 8th object is picked up and being about to be placed in the container!
+If you observe carefully, the 8th object is picked up already and is being about to be placed in the container!
 
 
