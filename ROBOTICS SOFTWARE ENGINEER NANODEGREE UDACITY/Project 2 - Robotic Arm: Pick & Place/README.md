@@ -235,12 +235,21 @@ For the calculation of theta2, we can use the following technique as shown
 
 ![IK_3](https://user-images.githubusercontent.com/35863175/57907142-18548600-789a-11e9-97e7-2fcccc102fd8.png)
 
+The formula for theta2 is given as - **Theta2 = pi/2 - angle a - atan2(s, r)**
+
+In code, it is calculated as per the above figure as follows :
+
+![r_s_values](https://user-images.githubusercontent.com/35863175/57913267-e0edd580-78a9-11e9-833e-c8a860dd5f73.PNG)
+
+
+![theta2 code](https://user-images.githubusercontent.com/35863175/57913294-ef3bf180-78a9-11e9-8e8c-70af060cc75c.PNG)
+
+
 For theta3. I have calculated it as below
 
 ![IK_4](https://user-images.githubusercontent.com/35863175/57907245-76816900-789a-11e9-9ea9-6502c4a863a8.png)
 
-
-From the DH parameters I calculated the distance between each joint and then used Cosine Laws to calculate theta2 and theta3.
+The formula for theta3 is given as - **Theta3 = pi/2 - angle b - atan2(0.0054, 1.5)
 
 In code, I have done it as follows : 
 
@@ -277,8 +286,8 @@ and the angles are given as follows
 ![Rotation angle gamma](https://user-images.githubusercontent.com/35863175/57880034-64bca900-783b-11e9-8f3b-c873fd00f558.png)
 
 Again to mention 
-**alpha = theta4**
-**beta = theta5**
+**alpha = theta4**, 
+**beta = theta5**, 
 **gamma = theta6**
 
 So, for this I have calculated them using the above formula provided for the alpha, beta and gamma angles.
