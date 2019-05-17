@@ -224,7 +224,22 @@ Now we can focus on  theta2 and theta3 angles:
 
 ![theta2_theta3](https://user-images.githubusercontent.com/35863175/57879546-62a61a80-783a-11e9-9259-3990d22091cc.png)
 
+In the above image only the illustration of theta2 is correct and the illustration of theta3 is not correct because they are actually getting same values as depicted in the above image!! So theta3 is will be calculated separately.
+
+For the calculation of theta2, we can use the following technique as shown
+
+![IK_3](https://user-images.githubusercontent.com/35863175/57907142-18548600-789a-11e9-97e7-2fcccc102fd8.png)
+
+For theta3. I have calculated it as below
+
+![IK_4](https://user-images.githubusercontent.com/35863175/57907245-76816900-789a-11e9-9ea9-6502c4a863a8.png)
+
+
 From the DH parameters I calculated the distance between each joint and then used Cosine Laws to calculate theta2 and theta3.
+
+In code, I have done it as follows : 
+
+![Calculation of theta 2 and theta 3](https://user-images.githubusercontent.com/35863175/57907553-6c139f00-789b-11e9-8c40-bb45266fffa8.png)
 
 Now moving on to Inverse Orientation
 
@@ -238,7 +253,6 @@ Using the values of the first joint angles obtained above, I calculated R0_3 via
 
 In coding I did as follows:
 
-
 ![Euler Angle code](https://user-images.githubusercontent.com/35863175/57879825-f0820580-783a-11e9-80a4-0de4cccffd92.png)
 
 where R0_6 is the homogeneous RPY rotation matrix calculated above from the base_link to gripper_link.
@@ -246,7 +260,8 @@ where R0_6 is the homogeneous RPY rotation matrix calculated above from the base
 R3_6 is the rotation matrix of the extrinsic X-Y-Z rotation sequence account for the end gripper from the wrist center:
 
 ![Rotation Matrix](https://user-images.githubusercontent.com/35863175/57879936-2b843900-783b-11e9-80b7-afcf74c33e0e.png)
-where R_XYZ is R3_6, and alpha, beta, gamma is theta4, theta5, theta6.
+
+**where R_XYZ is R3_6, and alpha, beta, gamma is theta4, theta5, theta6.**
 
 and the angles are given as follows
 
@@ -256,6 +271,18 @@ and the angles are given as follows
 
 ![Rotation angle gamma](https://user-images.githubusercontent.com/35863175/57880034-64bca900-783b-11e9-8f3b-c873fd00f558.png)
 
+Again to mention 
+**alpha = theta4**
+**beta = theta5**
+**gamma = theta6**
+
+So, for this I have calculated them using the above formula provided for the alpha, beta and gamma angles.
+
+Here we can see that theta5 (i.e. beta) has two solutions because there is a square root operation inside the atan2 function. Atan2 function returns the angles between -pi and pi. To account for the two solutions, I have done the following in my code:
+
+![Calculation of theta 5, theta 4 and theta 6](https://user-images.githubusercontent.com/35863175/57907503-47b7c280-789b-11e9-93d8-3b2c025c09c1.png)
+
+To pick the best solution for the theta4, theta5 and theta6, I used a simple if/else statement.
 
 ### Project Implementation
 
@@ -274,8 +301,12 @@ I have properly commented the code IK_server.py to make it more understandable.
 
 Screenshots showing the arm picking and placing!
 
-<img width="501" alt="Arm Picking Up 1" src="https://user-images.githubusercontent.com/35863175/57880174-bcf3ab00-783b-11e9-9d38-c7bce55bb6bd.png">
-
 ![Arm Picking Up 2](https://user-images.githubusercontent.com/35863175/57880187-c1b85f00-783b-11e9-8550-4b10f7e89378.png)
+
+And finally here is a screenshot of a completed operation of 8/10 pickup!!
+
+![Objects Pick Up and Placed 8](https://user-images.githubusercontent.com/35863175/57909565-c400d480-78a0-11e9-94ac-e1adf78c4099.PNG)
+
+If you observe carefully, the 8th object is picked up and being about to be placed in the container!
 
 
