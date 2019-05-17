@@ -249,7 +249,7 @@ For theta3. I have calculated it as below
 
 ![IK_4](https://user-images.githubusercontent.com/35863175/57907245-76816900-789a-11e9-9ea9-6502c4a863a8.png)
 
-The formula for theta3 is given as - **Theta3 = pi/2 - angle b - atan2(0.0054, 1.5)
+The formula for theta3 is given as - **Theta3 = pi/2 - angle b - atan2(0.0054, 1.5)**
 
 In code, I have done it as follows : 
 
@@ -296,7 +296,7 @@ Here we can see that theta5 (i.e. beta) has two solutions because there is a squ
 
 ![Calculation of theta 5, theta 4 and theta 6](https://user-images.githubusercontent.com/35863175/57907503-47b7c280-789b-11e9-93d8-3b2c025c09c1.png)
 
-To pick the best solution for the theta4, theta5 and theta6, I used a simple if/else statement and calculated the theta4 anf theta6 values according to the theta5 solution.
+To pick the best solution for the theta4, theta5 and theta6, I used a simple if/else statement and calculated the theta4 and theta6 values according to the theta5 solution.
 
 ### Project Implementation
 
@@ -312,6 +312,7 @@ In the inverse orientation step, I transposed the matrix R3_6 instead of invert 
 
 I have properly commented the code IK_server.py to make it more understandable. 
 
+### Screenshots
 
 Screenshots showing the arm picking and placing!
 
