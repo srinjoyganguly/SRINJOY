@@ -25,7 +25,7 @@ $ git clone https://github.com/udacity/RoboND-Perception-Project.git
 ```
 ### Note: If you have the Kinematics Pick and Place project in the same ROS Workspace as this project, please remove the 'gazebo_grasp_plugin' directory from the `RoboND-Perception-Project/` directory otherwise ignore this note. 
 
-Now install missing dependencies using rosdep install:
+Now install missing dependencies using rosdep install::
 ```sh
 $ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src --rosdistro=kinetic -y
