@@ -225,6 +225,8 @@ Finally, after training, I have saved my model as **model.sav** file. Here is th
 
 ![Training Model Saved Code](https://user-images.githubusercontent.com/35863175/58001011-2d463a80-7a8f-11e9-8513-dcd73cfc7af0.png)
 
+**Also to mention specially, only this single generic SVM model has been used to predict the objects in each of the World 1, 2 and 3. No dedicated SVM for each World was used here**
+
 After the training process, I proceeded to complete the object recognition code as follows - 
 
 ![Detecting Objects 1](https://user-images.githubusercontent.com/35863175/58001376-24a23400-7a90-11e9-8280-d885173d4386.png)
@@ -300,3 +302,8 @@ Preicted Objects -
 
 ![World_3_Predicted](https://user-images.githubusercontent.com/35863175/58002680-dabb4d00-7a93-11e9-8c46-2de0a988dca8.png)
 
+### Future Work 
+
+* A PR2 collision avoidance system can also be designed so that the robot does not collide with the surrounding objects while performing the pick and place operation.
+
+* More sensors such as Lidar can be added to make the perception pipeline more robust rather than only using RGBD cameras.
