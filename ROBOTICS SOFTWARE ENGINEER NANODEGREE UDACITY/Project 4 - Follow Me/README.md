@@ -338,7 +338,7 @@ In this project, I have use FCN for Semantic Segmentation but this can also be u
 
 ## Project Code Snippets 
 
-**Separable Convolutions Code which includes batch normalization as well along with ReLU activation function as shown below - **
+**Separable Convolutions Code which includes batch normalization as well along with ReLU activation function as shown below -**
 
 ![separable_conv2d_batchnorm_code](https://user-images.githubusercontent.com/35863175/58380630-e1385000-7fd0-11e9-9eb7-80ee6a82042e.PNG)
 
@@ -367,6 +367,16 @@ In this project, I have use FCN for Semantic Segmentation but this can also be u
 ![fcn_model_code_2](https://user-images.githubusercontent.com/35863175/58380689-b8fd2100-7fd1-11e9-81bb-ac98f6f64319.PNG)
 
 The softmax activation is being used in the last layer to activate the output pixels and indicate class and object location (semantic segmentation)
+
+**Shapes of the various layers**
+
+![shapes of layers](https://user-images.githubusercontent.com/35863175/58382827-b52ac800-7fec-11e9-9ee9-cc7ca907d4cd.PNG)
+
+**Here is a diagram of my FCN Model** 
+
+![my_fcn_model](https://user-images.githubusercontent.com/35863175/58382794-5e24f300-7fec-11e9-8a0c-7eca828b01f4.PNG)
+
+
 
 ## Selection of Hyper Parameters - 
 
