@@ -158,4 +158,4 @@ Share your scores in slack, and keep a tally in a pinned message. Scores should 
 $ python follower.py my_amazing_model.h5
 ```
 
-**Note:** If you'd like to see an overlay of the detected region on each camera frame from the drone, simply pass the `--pred_viz` parameter to `follower.py`
+**Note:** If you'd like to see an overlay of the detected region on each camera frame from the drone, simply pass the `--pred_viz` parameter to `follower.py`.
