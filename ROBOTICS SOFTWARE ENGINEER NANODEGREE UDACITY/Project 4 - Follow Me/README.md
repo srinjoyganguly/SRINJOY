@@ -63,10 +63,10 @@ A simple training dataset has been provided in this project's repository. This d
 The data directory is organized as follows:
 ```
 data/runs - contains the results of prediction runs
-data/train/images - contains images for the training set
-data/train/masks - contains masked (labeled) images for the training set
-data/validation/images - contains images for the validation set
-data/validation/masks - contains masked (labeled) images for the validation set
+data/train/images - contains images for the training set - 4131 images
+data/train/masks - contains masked (labeled) images for the training set - 4131 masks
+data/validation/images - contains images for the validation set - 1184 images
+data/validation/masks - contains masked (labeled) images for the validation set - 1184 masks
 data/weights - contains trained TensorFlow models
 
 data/raw_sim_data/train/run1
