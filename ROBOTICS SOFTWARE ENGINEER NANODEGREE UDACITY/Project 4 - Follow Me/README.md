@@ -330,7 +330,212 @@ While the math becomes more complex, the above technique can be extended to RGB 
 
 4. **Provides a bit of regularization** – Batch normalization adds a little noise to your network. In some cases, such as in Inception modules, batch normalization has been shown to work as well as dropout. 
 
-## Ouput Video!!!
+## When and Why We Use FCN?
+
+As mentioned above in the CNN section that, the CNN's cannot handle the different image sizes provided to them as inputs due to the presence of fully connected layers, but in FCN, we have all convolutional layers in the encoder and decoder blocks, so the size of image constraint is removed here. We need not to bother the size of our image while using FCN's. 
+
+In this project, I have use FCN for Semantic Segmentation but this can also be used for projects invloving scene understanding as well.
+
+## Project Code Snippets 
+
+**Separable Convolutions Code which includes batch normalization as well along with ReLU activation function as shown below - **
+
+![separable_conv2d_batchnorm_code](https://user-images.githubusercontent.com/35863175/58380630-e1385000-7fd0-11e9-9eb7-80ee6a82042e.PNG)
+
+**Normal Convolutional Layer for 1x1 along with batch normalization**
+
+![conv2d_batchnorm_code](https://user-images.githubusercontent.com/35863175/58380646-28bedc00-7fd1-11e9-879d-6b751fd99852.PNG)
+
+**Bilinear Upsampling Code as shown**
+
+![bilinear_upsample_code](https://user-images.githubusercontent.com/35863175/58380661-56a42080-7fd1-11e9-9de2-029e9f214a21.PNG)
+
+**The Encoder Block Code**
+
+![encoder_block_code](https://user-images.githubusercontent.com/35863175/58380666-6de30e00-7fd1-11e9-9bd0-8bd48b913877.PNG)
+
+
+**The Decoder Block Code**
+
+![decoder_block_code](https://user-images.githubusercontent.com/35863175/58380674-8d7a3680-7fd1-11e9-88f0-e7e768f51085.PNG)
+
+
+**FCN Model Code**
+
+![fcn_model_code_1](https://user-images.githubusercontent.com/35863175/58380685-ae428c00-7fd1-11e9-8f63-d2c4fe6a8819.PNG)
+
+![fcn_model_code_2](https://user-images.githubusercontent.com/35863175/58380689-b8fd2100-7fd1-11e9-81bb-ac98f6f64319.PNG)
+
+The softmax activation is being used in the last layer to activate the output pixels and indicate class and object location (semantic segmentation)
+
+## Selection of Hyper Parameters - 
+
+**To metion again properly, I have used the Udacity GPU Workspace to train my network and I have used the samples already provided by Udacity**
+
+### Batch Size
+
+**Batch Size is defined as the number of training samples/images that get propagated through the network in a single pass.** It is actually a good idea to start the batch sizes with the powers of 2, such as 16, 32, 64 and so on because of the inherent parallel architecture of GPU's and this helps to speed up the training as well. So, I chose 32 as my initial batch size for testing it with other hyper parameters.
+
+### Workers
+
+**Workers are the maximum number of processes to spin up.** I used workers = 2 as it was recommended by the Udacity team for their workspace.
+
+### Steps Per Epoch
+
+**Steps Per Epoch is the number of batches of training images that go through the network in 1 epoch.** One recommended value to try would be based on the total number of images in training dataset divided by the batch_size.
+
+I did the following as recommended - (4131/batch_size) - 1 
+
+### Validation Steps
+
+**Validation Steps is the number of batches of validation images that go through the network in 1 epoch.** This is similar to steps_per_epoch, except validation_steps is for the validation dataset.
+
+I did the following as recommneded - (1184/batch_size) - 1
+
+### Learning Rate
+
+**Learning Rate is the parameter that controls the size of weight and bias changes in learning of the training algorithm.** I used the values 0.01, 0.001, and 0.0001 to test my model performance and final score. To low learning rate will result in the model to learn very slowly and increases the training time. 
+
+### Number of Epochs
+
+**It is the number of times the entire training dataset gets propagated through the network. An epoch is a single forward and backward pass of the whole dataset. This is used to increase the accuracy of the model without requiring more data.** 
+
+I tried initially 40 epochs with each of the learning rate values but didn't achieved the final IoU score of more than 40%, but after that I trained for 100 epochs and I was able to achive more than 44% IoU score!!!
+
+### Parameter Collections Used for Tuning - 
+
+**All the model configuration files and model weights can be found inside the directory** - `data/weights`
+
+#### Parameter Collection 1 - RUN ONE
+
+* learning_rate = 0.01
+* batch_size = 32
+* number of epochs = 40
+* steps per epoch = int(4131/batch_size)-1
+* validation steps = int(1184/batch_size)-1
+* workers = 2
+
+The Graph is as shown below - 
+
+![model_weights_1_graph](https://user-images.githubusercontent.com/35863175/58380888-e9928a00-7fd4-11e9-9ced-57e3b5cbfe08.png)
+
+#### Parameter Collection 2 - RUN TWO
+
+* learning rate = 0.001
+* batch size = 32
+* number of epochs = 40
+* steps per epoch = int(4131/batch_size)-1
+* validation steps = int(1184/batch_size)-1
+* workers = 2
+
+The Graph is as shown below - 
+
+![model_weights_2_graph](https://user-images.githubusercontent.com/35863175/58380922-5a39a680-7fd5-11e9-8a07-7520f8f68a56.png)
+
+#### Parameter Collection 3 - RUN THREE
+
+* learning rate = 0.0001
+* batch size = 32
+* number of epochs = 40
+* steps per epoch = int(4131/batch_size)-1
+* validation steps = int(1184/batch_size)-1
+* workers = 2
+
+The Graph is as shown below - 
+
+![model_weights_3_graph](https://user-images.githubusercontent.com/35863175/58380943-93721680-7fd5-11e9-83a6-dd3490b10a8c.png)
+
+#### Parameter Collection 4 - RUN FOUR
+
+* learning rate = 0.01
+* batch size = 32
+* number of epochs = 100
+* steps per epoch = int(4131/batch_size)-1
+* validation steps = int(1184/batch_size)-1
+* workers = 2
+
+The Graph is as shown below - 
+
+![model_weights_4_graph](https://user-images.githubusercontent.com/35863175/58380983-05e2f680-7fd6-11e9-8bfb-f2e7d4b75a98.png)
+
+
+In this run, I was able to get a very great final IoU score of **0.442797636908**. This run took around 2 hours to train using the Udacity GPU workspace. The other three runs took around 50 minutes to train. 
+
+## Prediction 
+
+I have done the predictions using the **Parameter Collection 4**
+
+### following_target
+
+Test how well the network can identify the target while following them.
+
+![following_target_1](https://user-images.githubusercontent.com/35863175/58381047-a1746700-7fd6-11e9-8451-f4b05b308ead.png)
+
+![following_target_2](https://user-images.githubusercontent.com/35863175/58381053-ac2efc00-7fd6-11e9-97fd-c021c009072a.png)
+
+![following_target_3](https://user-images.githubusercontent.com/35863175/58381067-c79a0700-7fd6-11e9-8cca-eb67958ffa8c.png)
+
+
+#### Scores for while the quad is following behind the target.
+
+![following_target_scores](https://user-images.githubusercontent.com/35863175/58381081-df718b00-7fd6-11e9-86c1-00b4a0d9acaa.PNG)
+
+
+### patrol_without_target
+
+Test how often the network makes a mistake and identifies the wrong person as the target.
+
+![patrol_without_target_1](https://user-images.githubusercontent.com/35863175/58381125-4b53f380-7fd7-11e9-83fc-701b6672832f.png)
+
+![patrol_without_target_2](https://user-images.githubusercontent.com/35863175/58381134-56a71f00-7fd7-11e9-99ab-bf8f9d20b734.png)
+
+![patrol_without_target_3](https://user-images.githubusercontent.com/35863175/58381138-6161b400-7fd7-11e9-91a9-cc69ab693183.png)
+
+#### Scores for images while the quad is on patrol and the target is not visible
+
+![patrol_without_target_scores](https://user-images.githubusercontent.com/35863175/58381145-79d1ce80-7fd7-11e9-88ab-0e8eb7619085.PNG)
+
+### patrol_with_target
+
+Test how well the network can detect the hero from a distance.
+
+![patrol_with_target_1](https://user-images.githubusercontent.com/35863175/58381168-b6052f00-7fd7-11e9-8eef-975bed312013.png)
+
+
+![patrol_with_target_2](https://user-images.githubusercontent.com/35863175/58381177-c1f0f100-7fd7-11e9-9cf5-97eb23efd79a.png)
+
+
+![patrol_with_target_3](https://user-images.githubusercontent.com/35863175/58381181-ccab8600-7fd7-11e9-981c-4a73fbe9ff94.png)
+
+#### This score measures how well the neural network can detect the target from far away
+
+![detecting_target_when_far_away_scores](https://user-images.githubusercontent.com/35863175/58381200-e4830a00-7fd7-11e9-96fe-01065ba64836.PNG)
+
+## Evaluation
+
+We will be using the IoU to calculate the final score. IoU is Intersection over Union, where the Intersection set is an AND operation (pixels that are truly part of a class AND are classified as part of the class by the network) and the Union is an OR operation (pixels that are truly part of that class + pixels that are classified as part of that class by the network).
+
+![iou_equation](https://user-images.githubusercontent.com/35863175/58381229-2613b500-7fd8-11e9-8683-4a02cb5d2451.png)
+
+Sum all the true positives, etc from the three datasets to get a weight for the score: **0.7612612612612613**
+
+The IoU for the dataset that never includes the hero is excluded from grading: **0.581663168009**
+
+The Final Grade Score is the pixel wise:
+
+average_IoU*(n_true_positive/(n_true_positive+n_false_positive+n_false_negative))
+
+So the score is: **0.442797636908**
+
+## Can we use the same model to track other objects?
+
+Yes, we can use this same model to track other objects. This is a generic model and to track other objects, all we require is sufficient amount of training data. Apart from this to furhter improve the performace on other objects, additional layers can be added to the network to capture essence of image features and skip connections acan be used as well.
+
+## HTML version of model_training.ipynb notebook
+
+This can be found inside the folder named - `html`
+
+## Ouput Video - Testing model_weights_4.h5 on the Quad Simulator!!!
 
 https://youtu.be/XxCOg_dbuwY
 
